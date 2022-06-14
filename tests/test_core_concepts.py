@@ -18,7 +18,7 @@ class TestCoreConceptsDAG(unittest.TestCase):
         bash_task = self.dag.get_task("bash_command")
 
         self.assertEqual(bash_task.upstream_task_ids, set())
-        self.assertEqual(bash_task.downstream_task_ids, set(["python_function"]))
+        self.assertEqual(bash_task.downstream_task_ids, {"python_function"})
 
     def assertDagDictEqual(self, structure, dag):
         self.assertEqual(dag.task_dict.keys(), structure.keys())
