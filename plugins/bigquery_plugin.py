@@ -53,7 +53,7 @@ class BigQueryDataValidationOperator(BaseOperator):
 
         if not records:
             raise AirflowException("Query returned no results.")
-        elif not all([bool(record) for record in records]):
+        elif not all(bool(record) for record in records):
             raise AirflowException(
                 f"Test failed\nQuery: {self.sql}\nRecords: {records}"
             )

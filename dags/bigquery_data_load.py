@@ -16,9 +16,7 @@ default_arguments = {"owner": "YOUR-NAME-HERE", "start_date": days_ago(1)}
 
 def list_objects(bucket=None):
     hook = GoogleCloudStorageHook()
-    storage_objects = hook.list(bucket)
-
-    return storage_objects
+    return hook.list(bucket)
 
 
 def move_objects(source_bucket=None, destination_bucket=None, prefix=None, **kwargs):
@@ -31,7 +29,7 @@ def move_objects(source_bucket=None, destination_bucket=None, prefix=None, **kwa
         destination_object = storage_object
 
         if prefix:
-            destination_object = "{}/{}".format(prefix, storage_object)
+            destination_object = f"{prefix}/{storage_object}"
 
         hook.copy(source_bucket, storage_object, destination_bucket, destination_object)
         hook.delete(source_bucket, storage_object)
